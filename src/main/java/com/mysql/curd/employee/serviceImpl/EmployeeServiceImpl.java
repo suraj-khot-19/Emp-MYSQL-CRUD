@@ -12,7 +12,7 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
 
     //constructor dependency injection for repo
-    private EmployeeRepository repo;
+    private final EmployeeRepository repo;
 
     public EmployeeServiceImpl(EmployeeRepository repo) {
         super();
@@ -36,5 +36,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmpById(long id) {
         Optional<Employee> emp = repo.findById(id);
         return emp.orElse(null);
+    }
+
+    @Override
+    public Boolean deleteById(long id) {
+        Optional<Employee> emp = repo.findById(id);
+        if (emp.isPresent()) {
+            repo.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

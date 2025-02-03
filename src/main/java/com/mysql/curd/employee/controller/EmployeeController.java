@@ -14,7 +14,7 @@ import java.util.List;
 public class EmployeeController {
 
     //constructor dependency injection for service
-    private EmployeeService empService;
+    private final EmployeeService empService;
 
     public EmployeeController(EmployeeService empService) {
         super();
@@ -38,5 +38,14 @@ public class EmployeeController {
             return new ResponseEntity<>(emp, HttpStatus.FOUND);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable("id") long id) {
+        boolean isDeleted = empService.deleteById(id);
+        if (isDeleted)
+            return new ResponseEntity<>("Employee deleted successfully", HttpStatus.OK);
+        else
+            return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
     }
 }
