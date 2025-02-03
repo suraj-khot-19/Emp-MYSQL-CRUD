@@ -2,15 +2,18 @@ package com.mysql.curd.employee.controller;
 
 import com.mysql.curd.employee.model.Employee;
 import com.mysql.curd.employee.service.EmployeeService;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/emp")
 public class EmployeeController {
 
-    //constructor injection for employee service layer
+    //constructor dependency injection for service
     private EmployeeService empService;
 
     public EmployeeController(EmployeeService empService) {
@@ -18,9 +21,9 @@ public class EmployeeController {
         this.empService = empService;
     }
 
-    //save the employee post method
     @PostMapping("/new")
-    public ResponseEntity<Employee> saveEmp(@RequestBody Employee employee) {
-        return new ResponseEntity<>(empService.saveEmp(employee), HttpStatus.CREATED);
+    public ResponseEntity<Employee> saveEmp(@RequestBody Employee emp) {
+        return new ResponseEntity<>(empService.saveEmp(emp), HttpStatusCode.valueOf(201));
     }
+
 }

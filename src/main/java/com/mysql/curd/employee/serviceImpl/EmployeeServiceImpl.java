@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    //constructor injection
+    //constructor dependency injection for repo
     private EmployeeRepository repo;
 
     public EmployeeServiceImpl(EmployeeRepository repo) {
@@ -16,8 +16,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.repo = repo;
     }
 
+    //new emp then save
     @Override
-    public Employee saveEmp(Employee employee) {
-        return repo.save(employee);
+    public Employee saveEmp(Employee emp) {
+        return repo.save(emp);
     }
 }

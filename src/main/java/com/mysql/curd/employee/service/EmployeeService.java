@@ -4,5 +4,6 @@ import com.mysql.curd.employee.model.Employee;
 
 public interface EmployeeService {
 
-    Employee saveEmp(Employee employee);
+    //new emp then save
+    Employee saveEmp(Employee emp);
 }
