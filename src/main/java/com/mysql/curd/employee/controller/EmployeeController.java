@@ -48,4 +48,13 @@ public class EmployeeController {
         else
             return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateEmp(@PathVariable("id") long id, @RequestBody Employee newEmp) {
+        boolean isUpdated = empService.updateEmp(id, newEmp);
+        if (isUpdated)
+            return ResponseEntity.status(HttpStatus.OK).body("Employee with id "+id+" updated successfully!");
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee "+id+" Not Found!");
+    }
 }
